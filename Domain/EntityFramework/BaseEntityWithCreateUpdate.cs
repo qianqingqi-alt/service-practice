@@ -1,4 +1,4 @@
-﻿using Domain.Backstage.Entities;
+﻿using Domain.System.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.EntityFramework

@@ -2,13 +2,18 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HttpApi.Controllers.Backstage
+namespace HttpApi.Controllers.System
 {
-    [Route("api/Backstage/[controller]/[action]")]
+    [Route("api/System/[controller]/[action]")]
     [ApiController]
     public class TestController : Controller
     {
         public TestController() { }
+
+        /// <summary>
+        /// 测试
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [AllowAnonymous]
         public ActionResult<string> GetTest()

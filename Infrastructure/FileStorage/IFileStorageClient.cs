@@ -1,8 +1,4 @@
-﻿using Infrastructure.FileStorage;
-using System.IO;
-using System.Threading;
-
-namespace Infrastructure.FileStorage
+﻿namespace Infrastructure.FileStorage
 {
     public interface IFileStorageClient
     {

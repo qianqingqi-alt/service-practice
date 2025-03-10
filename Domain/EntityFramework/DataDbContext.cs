@@ -3,21 +3,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Domain.EntityFramework
 {
-    public partial class DapDbContext : BaseDbContext
+    public partial class DataDbContext : BaseDbContext
     {
         private UserContext _userContext;
 
-        public DapDbContext(DbContextOptions<DapDbContext> options, UserContext userContext) : base(options, userContext)
+        public DataDbContext(DbContextOptions<DataDbContext> options, UserContext userContext) : base(options, userContext)
         {
             _userContext = userContext;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //SysModelCreating(modelBuilder);
-            //DvModelCreating(modelBuilder);
-            //DmModelCreating(modelBuilder);
-            //DaModelCreating(modelBuilder);
+            SystemModelCreating(modelBuilder);
             base.OnModelCreating(modelBuilder);
 
             //DateTime（或DateTime?）类型的属性，转换为UTC时间

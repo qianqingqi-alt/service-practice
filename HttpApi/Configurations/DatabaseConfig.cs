@@ -10,7 +10,7 @@ namespace HttpApi.Configurations
         public static void AddDatabaseConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            services.AddDbContext<DapDbContext>(options => {
+            services.AddDbContext<DataDbContext>(options => {
                 var encryptKey = services.BuildServiceProvider().GetService<IOptions<ApplicationConfig>>()?.Value.EncryptionKey;
                 options.UseSqlServer(EncryptUtil.AESDecrypt(configuration.GetConnectionString("DataConnection") ?? "", encryptKey ?? ""));
                 //非调试时  取消EF 日志打印
