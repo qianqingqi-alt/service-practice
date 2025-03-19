@@ -1,4 +1,5 @@
-﻿using Application.System.Dtos;
+﻿
+using Application.System.Dtos;
 using AutoMapper;
 using Domain.System.Entities;
 
@@ -14,6 +15,8 @@ namespace Application.System
 
             // User
             CreateMap<User, UserBase>();
+            CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
 
             // FileStorage
             CreateMap<FileStorage, FileStorageDto>();

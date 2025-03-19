@@ -3,6 +3,8 @@ using HttpApi.Filters;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using Infrastructure;
+using HttpApi.Configurations;
+using Infrastructure.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,10 +36,29 @@ builder.Services.AddControllers(options =>
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(obj =>
+{
+    //var file = Path.Combine(AppContext.BaseDirectory, "service-practice-api.xml");
+    //obj.CustomSchemaIds(s => s.FullName);
+    //obj.IncludeXmlComments(file, true);
+    //obj.SchemaFilter<SwaggerSchemaFilter>();
+});
 
 //注入用户上下文UserContext
 builder.Services.AddScoped<UserContext>();
+
+//获取配置文件配置，和命令参数配置 合并为ApplicationConfig
+var env = builder.Environment;
+builder.Configuration.AddJsonFile($"appsettings.Dev.json", optional: true, reloadOnChange: true);
+builder.Services.Configure<ApplicationConfig>(builder.Configuration.GetSection("AppSettings"));
+
+//注入DBContext
+builder.Services.AddDatabaseConfiguration(builder.Configuration);
+//注入DDD
+builder.Services.RegisterServices();
+
+//分布式内存缓存 (AddDistributedMemoryCache) 是框架提供的 IDistributedCache 实现，用于将项存储在内存中。 分布式内存缓存不是真正的分布式缓存。
+builder.Services.AddDistributedMemoryCache();
 
 var app = builder.Build();
 
